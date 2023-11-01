@@ -27,7 +27,7 @@ const Circulo = styled.div<CirculoProps>`
 
 function CirculoComponent(props: CirculoProps) {
     return (
-        <Circulo>
+        <Circulo width={props.width} height={props.height} color={props.color} mb={props.mb} mt={props.mt} mr={props.mr} ml={props.ml}>
             {props.children}
         </Circulo>
     );
