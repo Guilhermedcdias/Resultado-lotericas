@@ -1,6 +1,6 @@
 // StyledNavbar.tsx
 import styled from 'styled-components';
-import Navbarlk from './elements/navbarLink';
+import Navbarlk from '../elements/navbarLink';
 
 interface linkProps {
     href: string;

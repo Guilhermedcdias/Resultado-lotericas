@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import MegaSena from './pages/MegaSena';
 import LotoFacil from './pages/LotoFacil';
 import Quina from './pages/Quina';
-import Navbar from './components/navbar';
+import Navbar from './components/Menu/navbar';
 import TimeMania from './pages/TimeMania';
 
 function App() {

@@ -1,6 +1,6 @@
-import Container from "./elements/container";
-import Image from "./elements/image";
-import Texto from "./elements/text";
+import Container from "../elements/container";
+import Image from "../elements/image";
+import Texto from "../elements/text";
 
 interface TextWithImageProps {
     color?: string;

@@ -4,6 +4,7 @@ import useLottery from "../hooks/useLotery";
 import Texto from "../components/elements/text";
 import Card from "../components/elements/card";
 import HrComponent from "../components/elements/hr";
+import Loading from "../components/Carregando/loading";
 
 function LotoFacil() {
     const { data, loading } = useLottery();
@@ -17,7 +18,7 @@ function LotoFacil() {
 
     if (loading) {
         return (
-            <Texto size="1.8rem" color="#000000" ml="5.5rem" mt="1.5rem">Carregando...</Texto>
+            <Loading />
         );
     }
 
