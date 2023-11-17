@@ -6,6 +6,7 @@ import Texto from "../elements/text";
 interface ResultadoProps {
     corTitulo?: string;
     numeros?: string[];
+    fonte?: string;
 }
 
 function Resultado(props: ResultadoProps) {
@@ -15,7 +16,7 @@ function Resultado(props: ResultadoProps) {
                 props.numeros?.map((numero, index) => {
                     return (
                         <CirculoComponent key={index} color={props.corTitulo} width="3rem" height="3rem" mr="1rem">
-                            <Texto size="1.8rem" color="#ffffff">{numero}</Texto>
+                            <Texto size="1.8rem" color={props.fonte}>{numero}</Texto>
                         </CirculoComponent>
                     );
                 })

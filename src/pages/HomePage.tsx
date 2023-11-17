@@ -1,4 +1,5 @@
 import Loading from "../components/Carregando/loading";
+import Principal from "../components/Principal/principal";
 import useLottery from "../hooks/useLotery";
 
 function HomePage() {
@@ -11,7 +12,7 @@ function HomePage() {
     }
 
     return (
-        <></>
+        <Principal></Principal>
     );
 }
 

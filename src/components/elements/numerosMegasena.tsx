@@ -1,5 +1,5 @@
-import CirculoComponent from "./elements/circulo";
-import Texto from "./elements/text";
+import CirculoComponent from "./circulo";
+import Texto from "./text";
 
 interface MegasenaProps{
     numeros: number[];

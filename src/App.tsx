@@ -1,58 +1,34 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { LotteryProvider } from './contexts/LoteriaContext';
 import HomePage from './pages/HomePage';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import MegaSena from './pages/MegaSena';
-import LotoFacil from './pages/LotoFacil';
 import Quina from './pages/Quina';
-import Navbar from './components/Menu/navbar';
 import TimeMania from './pages/TimeMania';
+import { ThemeProvider } from 'styled-components';
+import { mega, quina, timemania } from './styles/theme';
 
 function App() {
-  const [pathActive, setPathActive] = React.useState<string>('/');
-  const links = [
-        {
-      href: '/timemania',
-      color: '#00ff48',
-      name: 'TimeMania',
-      fsize: '1rem'
-    },
-    {
-      href: '/megasena',
-      color: '#209869',
-      name: 'Megasena',
-      fsize: '1rem'
-    },
-    // {
-    //   href: '/lotofacil',
-    //   color: '#260085',
-    //   name: 'Lotofacil',
-    //   fsize: '1rem'
-    // },
-    {
-      href: '/quina',
-      color: '#930089',
-      name: 'Quina',
-      fsize: '1rem'
-    },
-  ];
-  // função que verifica o path name toda vez que a pagina é carregada ou a rota muda
-  useEffect(() => {
-    const path = window.location.pathname
-    setPathActive(path)
-  }, [window.location.pathname])
-
-
   return (
     <LotteryProvider>
-      <Navbar links={links} pathActive={pathActive} />
       <Router>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/timemania" element={<TimeMania />} />
-          <Route path="/megasena" element={<MegaSena />} />
-          {/* <Route path="/lotofacil" element={<LotoFacil />} /> */}
-          <Route path="/quina" element={<Quina />} />
+          <Route path="/timemania" element={
+            <ThemeProvider theme={timemania}>
+              <TimeMania />
+            </ThemeProvider>
+          } />
+          <Route path="/megasena" element={
+            <ThemeProvider theme={mega}>
+              <MegaSena />
+            </ThemeProvider>
+          } />
+          <Route path="/quina" element={
+            <ThemeProvider theme={quina}>
+              <Quina />
+            </ThemeProvider>
+          } />
         </Routes>
       </Router>
     </LotteryProvider>

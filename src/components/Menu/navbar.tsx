@@ -2,15 +2,16 @@
 import styled from 'styled-components';
 import Navbarlk from '../elements/navbarLink';
 
-interface linkProps {
-    href: string;
-    color: string;
-    name: string;
-    fsize: string;
-}
+// interface linkProps {
+//     href: string;
+//     color: string;
+//     name: string;
+//     fsize: string;
+// }
 interface navbarProps {
-    links: linkProps[];
-    pathActive: string;
+    // links: linkProps[];
+    // pathActive: string;
+    children?: React.ReactNode;
 }
 
 const NavbarContainer = styled.nav`
@@ -29,15 +30,11 @@ const NavbarContainer = styled.nav`
 `;
 
 function Navbar(props: navbarProps) {
-    
+
 
     return (
         <NavbarContainer>
-            {props.links.map((link, index) => {
-                return (
-                    <Navbarlk color={link.color} fsize={link.fsize} href={link.href} name={link.name} active={(link.href == props.pathActive)? true : false} key={index}/>
-                )
-            })}
+            {props.children}
         </NavbarContainer>
     )
 }

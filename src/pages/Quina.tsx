@@ -1,33 +1,39 @@
-import Jogo from "../components/jogos";
 import React from 'react';
 import useLottery from "../hooks/useLotery";
-import Texto from "../components/elements/text";
 import Container from "../components/elements/container";
-import Card from "../components/elements/card";
-import HrComponent from "../components/elements/hr";
-import Loading from "../components/Carregando/loading";
+import Principal from "../components/Principal/principal";
+import Esquerda from "../components/Esquerda/esquerda";
+import TextWithImage from "../components/NomeLoteria/textWithImage";
+import Estimativa from "../components/Estimativa/estimativa";
+import Direita from "../components/Direita/direita";
+import Resultado from "../components/Resultado/resultado";
+import Acumulou from "../components/Acumulou/acumulou";
+import Data from "../components/Data/data";
+import { useTheme } from 'styled-components';
 
 function Quina() {
-    const { data, loading } = useLottery();
-
-    console.log(data);
+    const theme = useTheme();
+    const { data } = useLottery();
 
     const opcoesDeFormatacao = {
         style: 'currency',
         currency: 'BRL'
     };
 
-    if (loading) {
-        return (
-            <Loading />
-        );
-    }
-
     return (
-        <Card height="100vh" width="100%">
-            <Jogo titulo={data?.quina.tipoJogo.replace("_", " ")} corTitulo="#260085" imagem="/assets/trevo-quina.png" valor={`${data?.quina.valorEstimadoProximoConcurso.toLocaleString("pt-BR", opcoesDeFormatacao)}`} descricao={`Estimativa de premio do próximo concurso. Sorteio em ${data?.quina.dataProximoConcurso}`} tipoJogo="megasena" numeros={data?.quina.dezenas} descricaoGanhadoresSorteio={String(data?.quina.quantidadeGanhadores)} numeroConcurso={String(data?.quina.numeroDoConcurso)} dataConcurso={data?.quina.dataPorExtenso} />
-            <HrComponent width="100%" height=".5px" color="#ddd" mt="0rem" mb="1rem" radios="4rem" />
-        </Card>
+        <Principal>
+            <Container width={"80%"} height={"50vh"} mt="3rem">
+                <Esquerda>
+                    <TextWithImage imagem={'/assets/trevo-quina.png'} color={theme.loteria} text={data?.quina.tipoJogo.replace("_", " ")}></TextWithImage>
+                    <Estimativa corTitulo={theme.estimativa} descricao={`Estimativa de premio do próximo concurso. Sorteio em ${data?.quina.dataProximoConcurso}`} valor={`${data?.quina.valorEstimadoProximoConcurso.toLocaleString("pt-BR", opcoesDeFormatacao)}`} />
+                </Esquerda>
+                <Direita>
+                    <Resultado corTitulo={theme.bola} fonte={theme.bolafonte} numeros={data?.quina.dezenas} />
+                    <Acumulou descricaoGanhadoresSorteio={String(data?.quina.quantidadeGanhadores)} cor={theme.acumulou}/>
+                    <Data numeroConcurso={String(data?.quina.numeroDoConcurso)} dataConcurso={data?.quina.dataPorExtenso} cor={theme.data} />
+                </Direita>
+            </Container>
+        </Principal>
     );
 }
 
