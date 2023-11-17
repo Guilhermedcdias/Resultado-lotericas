@@ -1,6 +1,17 @@
 // StyledNavbar.tsx
-import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
+import Navbarlk from './elements/navbarLink';
+
+interface linkProps {
+    href: string;
+    color: string;
+    name: string;
+    fsize: string;
+}
+interface navbarProps {
+    links: linkProps[];
+    pathActive: string;
+}
 
 const NavbarContainer = styled.nav`
     display: flex;
@@ -14,35 +25,19 @@ const NavbarContainer = styled.nav`
     top: 0;
     left: 0;
     z-index: 10;
-    margin-bottom: 2rem;
+    font-family: 'Roboto', sans-serif;
 `;
 
-const NavbarLink = styled.a`
-  color: #006269;
-  padding: 0 15px;
-  text-decoration: none;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
+function Navbar(props: navbarProps) {
+    
 
-  &.active {
-    color: #aaa;
-    pointer-events: none;
-  }
-`;
-
-function Navbar() {
     return (
         <NavbarContainer>
-            <NavbarLink className={(window.location.pathname == "/megasena") ? 'active' : ''} href='/megasena'>
-                Mega Sena
-            </NavbarLink>
-            <NavbarLink className={window.location.pathname == "/lotofacil" ? 'active' : ''} href='/lotofacil'>
-                Lotofácil
-            </NavbarLink>
-            <NavbarLink className={window.location.pathname == "/quina" ? 'active' : ''} href='/quina'>
-                Quina
-            </NavbarLink>
+            {props.links.map((link, index) => {
+                return (
+                    <Navbarlk color={link.color} fsize={link.fsize} href={link.href} name={link.name} active={(link.href == props.pathActive)? true : false} key={index}/>
+                )
+            })}
         </NavbarContainer>
     )
 }
