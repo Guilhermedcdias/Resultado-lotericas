@@ -12,6 +12,12 @@ function HomePage() {
     const { data, loading, setReload } = usedata();
     const [valor, setValor] = useState<string>("");
     const adicionaValor = async () => {
+        // verificando se é mesmo um numero
+        if (isNaN(Number(valor))) {
+            alert("Valor inválido");
+            setValor("");
+            return;
+        }
         await CreateNumber(valor);
         setValor("");
         setReload(true);
