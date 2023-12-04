@@ -1,9 +1,21 @@
 import Loading from "../components/Carregando/loading";
-import Principal from "../components/Principal/principal";
-import useLottery from "../hooks/useLotery";
+import Container from "../components/Container/container";
+import Input from "../components/InputWithEnterSubmit/input";
+import NumberColumn from "../components/ListNumbers/list";
+import FundoInput from "../components/elements/fundoInput";
+import usedata from "../hooks/useData";
+import { useState } from "react";
+import { CreateNumber } from "../services/BackendService";
+
 
 function HomePage() {
-    const { data, loading } = useLottery();
+    const { data, loading, setReload } = usedata();
+    const [valor, setValor] = useState<string>("");
+    const adicionaValor = async () => {
+        await CreateNumber(valor);
+        setValor("");
+        setReload(true);
+    }
 
     if (loading) {
         return (
@@ -12,7 +24,16 @@ function HomePage() {
     }
 
     return (
-        <Principal></Principal>
+        <Container>
+            <FundoInput>
+                <Input placeholder="Entre com um valor" onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                        adicionaValor();
+                    }
+                }} value={valor} onChange={(e) => setValor(e.target.value)}></Input>
+            </FundoInput>
+            <NumberColumn numbers={data.numbers} sum={data.sum} />
+        </Container>
     );
 }
 
